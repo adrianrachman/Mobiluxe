@@ -147,7 +147,7 @@ public class login extends javax.swing.JFrame {
                         this.setVisible(false);
                         break;
                     case 3:
-                        kendaraan ken = new kendaraan();
+                        menu_kendaraan ken = new menu_kendaraan();
                         ken.setVisible(true);
                         this.setVisible(false);
                         ken.btn_logout.setEnabled(true);

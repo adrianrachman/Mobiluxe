@@ -13,60 +13,61 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author adria
  */
-public class menu_registrasi extends javax.swing.JFrame {
+public class menu_kendaraan extends javax.swing.JFrame {
     private DefaultTableModel model = null;
     private PreparedStatement stat;
     private ResultSet rs;
-    koneksi k = new koneksi();
+    koneksi k = new koneksi ();
     /**
-     * Creates new form menu_kendaraan
+     * Creates new form tambah_kendaraan
      */
-    public menu_registrasi() {
+    public menu_kendaraan() {
         initComponents();
         k.connection();
         refreshTable();
     }
     
-    class user extends menu_registrasi{
-        int id_user, id_level;
-        String nama_user, username, password;
+    class kendaraan extends menu_kendaraan{
+        int id_kendaraan, harga;
+        String nama_kendaraan, jenis_kendaraan, warna;
 
-        public user() {
-            nama_user = text_nama_user.getText();
-            username = text_username.getText();
-            password = text_password.getText();
-            id_level = Integer.parseInt(combo_id_level.getSelectedItem().toString());
+        public kendaraan() {
+            this.nama_kendaraan = text_nama_kendaraan.getText();
+            this.harga = Integer.parseInt(text_harga.getText());
+            this.jenis_kendaraan = combo_jenis_kendaraan.getSelectedItem().toString();
+            this.warna = combo_warna.getSelectedItem().toString();
         }
+        
+        
     }
     
     public void refreshTable(){
         model = new DefaultTableModel();
-        model.addColumn("Id User");
-        model.addColumn("Nama User");
-        model.addColumn("Username");
-        model.addColumn("Password");
-        model.addColumn("Id Level");
-        table_menu_registrasi.setModel(model);
+        model.addColumn("Id Kendaraan");
+        model.addColumn("Nama Kendaraan");
+        model.addColumn("Jenis Kendaraan");
+        model.addColumn("Harga");
+        model.addColumn("Warna");
+        table_kendaraan.setModel(model);
         try {
-            this.stat = k.getCon().prepareStatement("select * from user");
+            this.stat = k.getCon().prepareStatement("select * from kendaraan");
             this.rs = this.stat.executeQuery();
             while (rs.next()) {                
-                Object[] data ={
-                    rs.getString("id_user"),
-                    rs.getString("nama_user"),
-                    rs.getString("username"),
-                    rs.getString("password"),
-                    rs.getString("id_level")
+                Object[] data={
+                    rs.getInt("id_kendaraan"),
+                    rs.getString("nama_kendaraan"),
+                    rs.getString("jenis_kendaraan"),
+                    rs.getInt("harga"),
+                    rs.getString("warna")
                 };
                 model.addRow(data);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        text_id_user.setText("");
-        text_nama_user.setText("");
-        text_username.setText("");
-        text_password.setText("");
+        text_id_kendaraan.setText("");
+        text_nama_kendaraan.setText("");
+        text_harga.setText("");
     }
 
     /**
@@ -80,24 +81,25 @@ public class menu_registrasi extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel_id_user = new javax.swing.JLabel();
-        jLabel_nama_user = new javax.swing.JLabel();
-        jLabel_username = new javax.swing.JLabel();
-        jLabel_password = new javax.swing.JLabel();
-        jLabel_id_level = new javax.swing.JLabel();
-        text_id_user = new javax.swing.JTextField();
-        text_nama_user = new javax.swing.JTextField();
-        text_username = new javax.swing.JTextField();
-        text_password = new javax.swing.JTextField();
+        jLabel_id_kendaraan = new javax.swing.JLabel();
+        jLabel_nama_kendaraan = new javax.swing.JLabel();
+        jLabel_jenis_kendaraan = new javax.swing.JLabel();
+        jLabel_harga = new javax.swing.JLabel();
+        jLabel_warna = new javax.swing.JLabel();
+        text_id_kendaraan = new javax.swing.JTextField();
+        text_nama_kendaraan = new javax.swing.JTextField();
+        text_harga = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         btn_input = new javax.swing.JButton();
         btn_update = new javax.swing.JButton();
         btn_delete = new javax.swing.JButton();
-        btn_kendaraan = new javax.swing.JButton();
+        btn_menu_registrasi = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        table_menu_registrasi = new javax.swing.JTable();
-        combo_id_level = new javax.swing.JComboBox<>();
+        table_kendaraan = new javax.swing.JTable();
+        combo_warna = new javax.swing.JComboBox<>();
         btn_logout = new javax.swing.JButton();
+        btn_menu_transaksi = new javax.swing.JButton();
+        combo_jenis_kendaraan = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -115,21 +117,22 @@ public class menu_registrasi extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel_id_user.setText("Id User");
+        jLabel_id_kendaraan.setText("Id Kendaraan");
 
-        jLabel_nama_user.setText("Nama User");
+        jLabel_nama_kendaraan.setText("Nama Kendaraan");
 
-        jLabel_username.setText("Username");
+        jLabel_jenis_kendaraan.setText("Jenis Kendaraan");
 
-        jLabel_password.setText("Password");
+        jLabel_harga.setText("Harga");
 
-        jLabel_id_level.setText("Id Level");
+        jLabel_warna.setText("Warna");
 
-        text_id_user.setEnabled(false);
+        text_id_kendaraan.setEnabled(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         btn_input.setText("INPUT");
+        btn_input.setEnabled(false);
         btn_input.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_inputActionPerformed(evt);
@@ -137,15 +140,7 @@ public class menu_registrasi extends javax.swing.JFrame {
         });
 
         btn_update.setText("UPDATE");
-        btn_update.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-                btn_updateAncestorRemoved(evt);
-            }
-        });
+        btn_update.setEnabled(false);
         btn_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_updateActionPerformed(evt);
@@ -153,16 +148,18 @@ public class menu_registrasi extends javax.swing.JFrame {
         });
 
         btn_delete.setText("DELETE");
+        btn_delete.setEnabled(false);
         btn_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_deleteActionPerformed(evt);
             }
         });
 
-        btn_kendaraan.setText("KENDARAAN");
-        btn_kendaraan.addActionListener(new java.awt.event.ActionListener() {
+        btn_menu_registrasi.setText("MENU REGISTRASI");
+        btn_menu_registrasi.setEnabled(false);
+        btn_menu_registrasi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_kendaraanActionPerformed(evt);
+                btn_menu_registrasiActionPerformed(evt);
             }
         });
 
@@ -178,7 +175,7 @@ public class menu_registrasi extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btn_delete)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_kendaraan)
+                .addComponent(btn_menu_registrasi)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -189,11 +186,11 @@ public class menu_registrasi extends javax.swing.JFrame {
                     .addComponent(btn_input)
                     .addComponent(btn_update)
                     .addComponent(btn_delete)
-                    .addComponent(btn_kendaraan))
+                    .addComponent(btn_menu_registrasi))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        table_menu_registrasi.setModel(new javax.swing.table.DefaultTableModel(
+        table_kendaraan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -204,23 +201,34 @@ public class menu_registrasi extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        table_menu_registrasi.addMouseListener(new java.awt.event.MouseAdapter() {
+        table_kendaraan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                table_menu_registrasiMouseClicked(evt);
+                table_kendaraanMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(table_menu_registrasi);
+        jScrollPane2.setViewportView(table_kendaraan);
 
-        combo_id_level.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+        combo_warna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hitam", "Putih", "Merah" }));
 
         btn_logout.setText("logout");
+        btn_logout.setEnabled(false);
         btn_logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_logoutActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("menu registrasi");
+        btn_menu_transaksi.setText("menu transaksi");
+        btn_menu_transaksi.setEnabled(false);
+        btn_menu_transaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_menu_transaksiActionPerformed(evt);
+            }
+        });
+
+        combo_jenis_kendaraan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sport", "SUV", "MPV" }));
+
+        jLabel1.setText("menu kendaraan");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -231,58 +239,61 @@ public class menu_registrasi extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel_id_kendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(text_id_kendaraan))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_nama_user, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel_username, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel_password, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel_id_level, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel_nama_kendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_jenis_kendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_harga, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_warna, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(text_nama_user, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                            .addComponent(text_username, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                            .addComponent(text_password, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                            .addComponent(combo_id_level, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(text_nama_kendaraan)
+                            .addComponent(text_harga)
+                            .addComponent(combo_warna, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(combo_jenis_kendaraan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btn_logout))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel_id_user, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(text_id_user))))
+                        .addComponent(btn_menu_transaksi)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_logout)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(177, 177, 177))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btn_logout)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_logout)
+                    .addComponent(btn_menu_transaksi))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_id_kendaraan)
+                    .addComponent(text_id_kendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_id_user)
-                    .addComponent(text_id_user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(text_nama_kendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_nama_kendaraan))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(text_nama_user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_nama_user))
+                    .addComponent(jLabel_jenis_kendaraan)
+                    .addComponent(combo_jenis_kendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(text_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_username))
+                    .addComponent(text_harga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_harga))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(text_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_password))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_id_level)
-                    .addComponent(combo_id_level, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel_warna)
+                    .addComponent(combo_warna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -296,13 +307,13 @@ public class menu_registrasi extends javax.swing.JFrame {
     private void btn_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inputActionPerformed
         // TODO add your handling code here:
         try {
-            user u = new user();
-            this.stat = k.getCon().prepareStatement("insert into user values(?,?,?,?,?)");
+            kendaraan m = new kendaraan();
+            this.stat = k.getCon().prepareStatement("insert into kendaraan values(?,?,?,?,?)");
             stat.setInt(1, 0);
-            stat.setString(2, u.nama_user);
-            stat.setString(3, u.username);
-            stat.setString(4, u.password);
-            stat.setInt(5, u.id_level);
+            stat.setString(2, m.nama_kendaraan);
+            stat.setString(3, m.jenis_kendaraan);
+            stat.setInt(4, m.harga);
+            stat.setString(5, m.warna);
             stat.executeUpdate();
             refreshTable();
         } catch (Exception e) {
@@ -313,14 +324,14 @@ public class menu_registrasi extends javax.swing.JFrame {
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
         try {
-            user u = new user();
-            this.stat = k.getCon().prepareStatement("update user set nama_user=?,username=?,"
-                    + "password=?,id_level=? where id_user=?");
-            stat.setString(1, u.nama_user);
-            stat.setString(2, u.username);
-            stat.setString(3, u.password);
-            stat.setInt(4, u.id_level);
-            stat.setString(5, text_id_user.getText());
+            kendaraan m = new kendaraan();
+            this.stat = k.getCon().prepareStatement("update kendaraan set nama_kendaraan=?,"
+                    + "jenis_kendaraan=?,harga=?,warna=? where id_kendaraan=?");
+            stat.setString(1, m.nama_kendaraan);
+            stat.setString(2, m.jenis_kendaraan);
+            stat.setInt(3, m.harga);
+            stat.setString(4, m.warna);
+            stat.setInt(5, Integer.parseInt(text_id_kendaraan.getText()));
             stat.executeUpdate();
             refreshTable();
         } catch (Exception e) {
@@ -335,24 +346,18 @@ public class menu_registrasi extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btn_logoutActionPerformed
 
-    private void table_menu_registrasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_menu_registrasiMouseClicked
+    private void table_kendaraanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_kendaraanMouseClicked
         // TODO add your handling code here:
-        text_id_user.setText(model.getValueAt(table_menu_registrasi.getSelectedRow(), 0).toString());
-        text_nama_user.setText(model.getValueAt(table_menu_registrasi.getSelectedRow(), 1).toString());
-        text_username.setText(model.getValueAt(table_menu_registrasi.getSelectedRow(), 2).toString());
-        text_password.setText(model.getValueAt(table_menu_registrasi.getSelectedRow(), 3).toString());
-    }//GEN-LAST:event_table_menu_registrasiMouseClicked
-
-    private void btn_updateAncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_btn_updateAncestorRemoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_updateAncestorRemoved
+        text_id_kendaraan.setText(model.getValueAt(table_kendaraan.getSelectedRow(), 0).toString());
+        text_nama_kendaraan.setText(model.getValueAt(table_kendaraan.getSelectedRow(), 1).toString());
+        text_harga.setText(model.getValueAt(table_kendaraan.getSelectedRow(), 3).toString());
+    }//GEN-LAST:event_table_kendaraanMouseClicked
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         // TODO add your handling code here:
         try {
-            user u = new user();
-            this.stat = k.getCon().prepareStatement("delete from user where id_user=?");
-            stat.setString(1, text_id_user.getText());
+            this.stat = k.getCon().prepareStatement("delete from kendaraan where id_kendaraan=?");
+            stat.setInt(1, Integer.parseInt(text_id_kendaraan.getText()));
             stat.executeUpdate();
             refreshTable();
         } catch (Exception e) {
@@ -360,17 +365,19 @@ public class menu_registrasi extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_deleteActionPerformed
 
-    private void btn_kendaraanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_kendaraanActionPerformed
+    private void btn_menu_registrasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menu_registrasiActionPerformed
         // TODO add your handling code here:
-        menu_kendaraan ken = new menu_kendaraan();
-        ken.setVisible(true);
+        menu_registrasi reg = new menu_registrasi();
+        reg.setVisible(true);
         this.setVisible(false);
-        ken.btn_input.setEnabled(true);
-        ken.btn_update.setEnabled(true);
-        ken.btn_delete.setEnabled(true);
-        ken.btn_menu_transaksi.setEnabled(true);
-        ken.btn_menu_registrasi.setEnabled(true);
-    }//GEN-LAST:event_btn_kendaraanActionPerformed
+    }//GEN-LAST:event_btn_menu_registrasiActionPerformed
+
+    private void btn_menu_transaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menu_transaksiActionPerformed
+        // TODO add your handling code here:
+        menu_transaksi tran = new menu_transaksi();
+        tran.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_menu_transaksiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -389,13 +396,13 @@ public class menu_registrasi extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(menu_registrasi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(kendaraan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(menu_registrasi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(kendaraan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(menu_registrasi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(kendaraan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(menu_registrasi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(kendaraan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -403,7 +410,7 @@ public class menu_registrasi extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new menu_registrasi().setVisible(true);
+                new menu_kendaraan().setVisible(true);
             }
         });
     }
@@ -411,24 +418,25 @@ public class menu_registrasi extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btn_delete;
     public javax.swing.JButton btn_input;
-    public javax.swing.JButton btn_kendaraan;
     public javax.swing.JButton btn_logout;
+    public javax.swing.JButton btn_menu_registrasi;
+    public javax.swing.JButton btn_menu_transaksi;
     public javax.swing.JButton btn_update;
-    private javax.swing.JComboBox<String> combo_id_level;
+    private javax.swing.JComboBox<String> combo_jenis_kendaraan;
+    private javax.swing.JComboBox<String> combo_warna;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel_id_level;
-    private javax.swing.JLabel jLabel_id_user;
-    private javax.swing.JLabel jLabel_nama_user;
-    private javax.swing.JLabel jLabel_password;
-    private javax.swing.JLabel jLabel_username;
+    private javax.swing.JLabel jLabel_harga;
+    private javax.swing.JLabel jLabel_id_kendaraan;
+    private javax.swing.JLabel jLabel_jenis_kendaraan;
+    private javax.swing.JLabel jLabel_nama_kendaraan;
+    private javax.swing.JLabel jLabel_warna;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable table_menu_registrasi;
-    private javax.swing.JTextField text_id_user;
-    private javax.swing.JTextField text_nama_user;
-    private javax.swing.JTextField text_password;
-    private javax.swing.JTextField text_username;
+    private javax.swing.JTable table_kendaraan;
+    private javax.swing.JTextField text_harga;
+    private javax.swing.JTextField text_id_kendaraan;
+    private javax.swing.JTextField text_nama_kendaraan;
     // End of variables declaration//GEN-END:variables
 }

@@ -70,11 +70,15 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="text_nama_customer" max="32767" attributes="0"/>
                           <Component id="text_total_bayar" alignment="0" max="32767" attributes="0"/>
-                          <Component id="combo_id_kendaraan" alignment="0" max="32767" attributes="0"/>
                           <Component id="text_jumlah_beli" alignment="0" max="32767" attributes="0"/>
                           <Component id="text_nama_kendaraan" alignment="0" max="32767" attributes="0"/>
                           <Component id="combo_jenis_kendaraan" alignment="0" max="32767" attributes="0"/>
                           <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="combo_id_kendaraan" min="-2" pref="160" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btn_kendaraan" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <Component id="jScrollPane2" alignment="0" pref="0" max="32767" attributes="0"/>
@@ -97,7 +101,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btn_logout" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="13" max="32767" attributes="0"/>
+              <EmptySpace pref="12" max="32767" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -113,6 +117,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel_id_kendaraan" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="combo_id_kendaraan" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_kendaraan" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -367,6 +372,11 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="text" type="java.lang.String" value="menu transaksi"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_kendaraan">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="KENDARAAN"/>
       </Properties>
     </Component>
   </SubComponents>
