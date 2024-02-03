@@ -341,8 +341,8 @@ public class menu_kendaraan extends javax.swing.JFrame {
 
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
         // TODO add your handling code here:
-        login l = new login();
-        l.setVisible(true);
+        login log = new login();
+        log.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_logoutActionPerformed
 
