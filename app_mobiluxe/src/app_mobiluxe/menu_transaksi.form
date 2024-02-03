@@ -91,7 +91,7 @@
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="184" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -104,7 +104,7 @@
               <Component id="btn_logout" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel_id_user" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="text_id_transaksi" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -381,7 +381,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="menu transaksi"/>
+        <Property name="text" type="java.lang.String" value="TRANSAKSI"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btn_kendaraan">

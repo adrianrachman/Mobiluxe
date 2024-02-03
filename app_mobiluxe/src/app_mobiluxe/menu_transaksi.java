@@ -275,7 +275,7 @@ public class menu_transaksi extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("menu transaksi");
+        jLabel1.setText("TRANSAKSI");
 
         btn_kendaraan.setText("KENDARAAN");
         btn_kendaraan.addActionListener(new java.awt.event.ActionListener() {
@@ -325,7 +325,7 @@ public class menu_transaksi extends javax.swing.JFrame {
                         .addComponent(btn_logout)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(184, 184, 184)
+                .addGap(180, 180, 180)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -336,7 +336,7 @@ public class menu_transaksi extends javax.swing.JFrame {
                 .addComponent(btn_logout)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_id_user)
                     .addComponent(text_id_transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))

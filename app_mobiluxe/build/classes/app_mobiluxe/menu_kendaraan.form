@@ -70,7 +70,7 @@
                           <Component id="combo_jenis_kendaraan" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="jScrollPane2" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" alignment="0" pref="408" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="btn_menu_transaksi" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
@@ -94,9 +94,9 @@
                   <Component id="btn_logout" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_menu_transaksi" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel_id_kendaraan" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="text_id_kendaraan" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -334,7 +334,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="menu kendaraan"/>
+        <Property name="text" type="java.lang.String" value="KENDARAAAN"/>
       </Properties>
     </Component>
   </SubComponents>
